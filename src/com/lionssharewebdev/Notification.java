@@ -10,11 +10,12 @@ public class Notification {
     private LocalDateTime createdAt;
     private String subject;
     private String body;
+    protected String status = "OK";
 
-    public Notification(String subject, String body) {
+    public Notification(LocalDateTime createdAt, String subject, String body) {
         this.subject = subject;
         this.body = body;
-        createdAt = LocalDateTime.now();
+        this.createdAt = createdAt;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -28,6 +29,14 @@ public class Notification {
     public String getBody() {
         return body;
     }
+
+    public void showStatus(){
+        System.out.println("Current status: "+ status);
+    }
+
+    protected void showSubjectTime(){
+        System.out.println("Your notification was created at : " + createdAt + "and the subject was " + subject + ".");
+    };
 
     public void transport() throws NoTransportException {
         throw new NoTransportException();

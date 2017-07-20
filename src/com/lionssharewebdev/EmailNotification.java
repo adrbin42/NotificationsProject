@@ -51,9 +51,28 @@ public class EmailNotification extends Notification {
 
         EmailNotification that = (EmailNotification) o;
 
-        if (getRecipient() != null ? !getRecipient().equals(that.getRecipient()) : that.getRecipient() != null)
+        if (getRecipient() != null ? !getRecipient().equals(that.getRecipient()) : that.getRecipient() != null) {
             return false;
+        }
         return getSmtpProvider() != null ? getSmtpProvider().equals(that.getSmtpProvider()) : that.getSmtpProvider() == null;
+
+        /*
+        ternary same thing as if/else
+        boolean predicate;
+        if(recipient != null){
+            predicate = !recipient.equals(that.recipient);
+        }else {
+            predicate = that.recipient !=null;
+        }
+
+        if(predicate){
+        return false;
+        }
+
+        if(recipient == null ? that.recipient == !null : !recipient.equals(that.recipient))
+
+
+         */
     }
 
     @Override
@@ -61,10 +80,20 @@ public class EmailNotification extends Notification {
         int result = getRecipient() != null ? getRecipient().hashCode() : 0;
         result = 31 * result + (getSmtpProvider() != null ? getSmtpProvider().hashCode() : 0);
         return result;
+        /* Hash code the collection holds them in buckets so that you only have to check the buckets
+        * two hash codes are not garunteed to be equals but two equal objects will have the same hash code
+        *  a good hash algorithm will put one or two hash in the same bucket.
+        * */
     }
 
     @Override
     protected Object clone() throws CloneNotSupportedException {
-        return new EmailNotification(LocalDateTime.now(), "Meet up later", "Meet me at 3pm", "Alexis Bing"," AT&T" );
+        EmailNotification newEmailNotification = new EmailNotification(LocalDateTime.now(),"Project","Project is on track.","Alexis Bing","AT&T");
+        return newEmailNotification;
+        /*
+        *return new EmailNotification(getSubject(), getBody(), recipient, smtpProvider);
+         *
+         * */
+
     }
 }

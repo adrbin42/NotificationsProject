@@ -88,12 +88,9 @@ public class EmailNotification extends Notification {
 
     @Override
     protected Object clone() throws CloneNotSupportedException {
-        EmailNotification newEmailNotification = new EmailNotification(LocalDateTime.now(),"Project","Project is on track.","Alexis Bing","AT&T");
+        EmailNotification newEmailNotification = new EmailNotification(getCreatedAt(), getSubject(), getBody(), recipient, smtpProvider);
         return newEmailNotification;
-        /*
-        *return new EmailNotification(getSubject(), getBody(), recipient, smtpProvider);
-         *
-         * */
+
 
     }
 }
